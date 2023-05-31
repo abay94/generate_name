@@ -4,4 +4,5 @@ Need to run main.py
 
 
 Libs: 
- pandas
+
+pip3 install pandas
