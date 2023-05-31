@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import random
 import pandas as pd
 from collections import defaultdict
@@ -27,18 +28,32 @@ def build_bigram_frequencies(names):
 
     return bigram_prob
 
-# Example usage
-file_path = 'names.txt'  # Replace with your file path
+file_path = 'names.txt' 
 names = read_names_from_file(file_path)
 bigram_frequencies = build_bigram_frequencies(names)
 
-# Create a DataFrame from the bigram probabilities
+# bigram probabilities
 df = pd.DataFrame(bigram_frequencies).fillna(0)
 df.index.name = 'First Letter'
 df.columns.name = 'Second Letter'
 
-# Display the DataFrame
+# DataFrame
 print(df)
+
+# Generate the heatmap
+plt.figure(figsize=(8, 6))
+plt.imshow(df.values, cmap='Blues')
+
+plt.xticks(range(df.shape[1]), df.columns, rotation=90)
+plt.yticks(range(df.shape[0]), df.index)
+plt.xlabel('Second Letter')
+plt.ylabel('First Letter')
+
+cbar = plt.colorbar()
+cbar.set_label('Probability')
+
+# Show the plot
+plt.show()
 
 
 ### need to generate name
